@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Basic vars
-TEMP_FILE="/var/k3screenctrl/wan_speed"
+TEMP_FILE="/tmp/k3screenctrl/wan_speed"
 WAN_STAT=`ifstatus wan`
 WAN6_STAT=`ifstatus wan6`
 

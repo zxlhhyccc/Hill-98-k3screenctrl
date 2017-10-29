@@ -6,7 +6,7 @@
 PRODUCT_NAME=${LEDE_DEVICE_PRODUCT}
 
 # WAN_IFNAME=$(uci get network.wan.ifname)
-MAC_ADDR=$(cat /var/k3screenctrl/macaddr)
+MAC_ADDR=$(cat /tmp/k3screenctrl/macaddr)
 
 HW_VERSION=${LEDE_DEVICE_REVISION:0:2}
 FW_VERSION=$(cat /etc/openwrt_version)

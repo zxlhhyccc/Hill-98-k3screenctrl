@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright (C) 2017 XiaoShan https://www.mivm.cn
 
-temp_dir=/var/k3screenctrl
+temp_dir=/tmp/k3screenctrl
 dhcp_leases=$(uci get dhcp.@dnsmasq[0].leasefile)
 lan_ip=$(uci get network.lan.ipaddr | awk -F . '{print $1"."$2"."$3"."}')
 #dhcp_ip_list=$(cat $dhcp_leases | grep "$lan_ip" | awk '{print $3}')

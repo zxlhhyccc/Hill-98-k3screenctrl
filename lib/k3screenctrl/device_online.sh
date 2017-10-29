@@ -1,5 +1,5 @@
 #!/bin/sh
-file=/var/k3screenctrl/device_online
+file=/tmp/k3screenctrl/device_online
 if [ $# -eq 0 ]; then
     pid=$(pidof $(basename $0) | sed 's/'$$'//')
     kill -9 $pid >/dev/null 2>&1
