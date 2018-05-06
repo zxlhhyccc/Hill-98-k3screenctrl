@@ -13,7 +13,7 @@ FW_VERSION=$(cat /etc/openwrt_version)
 
 echo $PRODUCT_NAME
 
-if [ $(uci get k3screenctrl.@general[0].cputemp) -eq 1 ]; then
+if [ $(uci get k3screenctrl.general.cputemp) -eq 1 ]; then
     CPU_TEMP=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))
     echo $HW_VERSION $CPU_TEMP
 else

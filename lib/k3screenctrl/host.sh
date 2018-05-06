@@ -14,7 +14,7 @@ oui_data=$(cat /lib/k3screenctrl/oui/oui.txt)
 last_time=$(cat $temp_dir/device_speed/time 2>/dev/null || date +%s)
 curr_time=$(date +%s)
 time_s=$(($curr_time - $last_time))
-[ $? -ne 0 -o $time_s -eq 0 ] && time_s=$(uci -q get k3screenctrl.@general[0].refresh_time || echo 2)
+[ $? -ne 0 -o $time_s -eq 0 ] && time_s=$(uci -q get k3screenctrl.general.refresh_time || echo 2)
 
 for ((i=0;i<${#device_list_ip[@]};i++))
 do
