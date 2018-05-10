@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (C) 2017 XiaoShan https://www.mivm.cn
+# Copyright (C) 2018 XiaoShan mivm.cn
 
 temp_dir=/tmp/k3screenctrl
 dhcp_leases=$(uci get dhcp.@dnsmasq[0].leasefile)
