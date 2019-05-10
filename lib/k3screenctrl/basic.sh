@@ -21,4 +21,5 @@ else
 fi
 
 echo $FW_VERSION
+echo $FW_VERSION
 echo $MAC_ADDR
