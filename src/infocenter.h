@@ -13,5 +13,5 @@ extern WAN_INFO g_wan_info;
 extern WIFI_INFO g_wifi_info;
 extern struct _host_info_single *g_host_info_array;
 extern unsigned int g_host_info_elements;
-
+extern WEATHER_INFO g_weather_info;
 #endif

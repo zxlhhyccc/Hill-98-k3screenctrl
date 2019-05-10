@@ -127,7 +127,8 @@ static int update_basic_info() {
         TOKEN_STRING_OVERWRITE_STORE(g_basic_info.product_name),
         TOKEN_STRING_OVERWRITE_STORE(g_basic_info.hw_version),
         TOKEN_STRING_OVERWRITE_STORE(g_basic_info.fw_version),
-        TOKEN_STRING_OVERWRITE_STORE(g_basic_info.mac_addr_base),
+        TOKEN_STRING_OVERWRITE_STORE(g_basic_info.sw_version),
+		TOKEN_STRING_OVERWRITE_STORE(g_basic_info.mac_addr_base),
     };
     return update_storage_from_script(CFG->basic_info_script, stores,
                                       sizeof(stores) / sizeof(stores[0]));
@@ -249,6 +250,20 @@ final_exit:
     return ret;
 }
 
+WEATHER_INFO g_weather_info;
+static int update_weather_info() {
+	    static const struct _token_store stores[] = {
+	            TOKEN_STRING_OVERWRITE_STORE(g_weather_info.city),
+	            TOKEN_STRING_OVERWRITE_STORE(g_weather_info.temp),
+	            TOKEN_STRING_OVERWRITE_STORE(g_weather_info.date),
+	            TOKEN_STRING_OVERWRITE_STORE(g_weather_info.time),
+	            TOKEN_BYTE_STORE(g_weather_info.weather),
+	            TOKEN_BYTE_STORE(g_weather_info.week),
+	            TOKEN_BYTE_STORE(g_weather_info.error),
+	        };
+	       return update_storage_from_script(CFG->weather_script, stores, sizeof(stores) / sizeof(stores[0]));
+}
+
 int update_page_info(PAGE page) {
     int (*updater)() = NULL;
 
@@ -261,6 +276,9 @@ int update_page_info(PAGE page) {
         break;
     case PAGE_WAN:
         updater = update_wan_info;
+        break;
+    case PAGE_WEATHER:
+        updater = update_weather_info;
         break;
     case PAGE_WIFI:
         updater = update_wifi_info;
@@ -284,6 +302,7 @@ int update_all_info() {
     ret |= update_wan_info();
     ret |= update_wifi_info();
     ret |= update_host_info();
+    ret |= update_weather_info();
     return ret;
 }
 
@@ -292,5 +311,6 @@ void print_all_info() {
     print_wifi_info(&g_wifi_info);
     print_wan_info(&g_wan_info);
     print_port_info(&g_port_info);
+    print_weather_info(&g_weather_info);
     print_host_info(g_host_info_array, g_host_info_elements);
 }

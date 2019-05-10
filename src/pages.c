@@ -18,10 +18,11 @@ static int get_hosts_count() { return g_host_info_elements; }
 
 static void send_page_data(PAGE page) {
     switch (page) {
+    case PAGE_UPGRADE_INFO:
     case PAGE_BASIC_INFO:
         request_update_basic_info(
-            g_basic_info.product_name, g_basic_info.hw_version,
-            g_basic_info.fw_version, g_basic_info.mac_addr_base);
+            g_basic_info.product_name, g_basic_info.hw_version, g_basic_info.fw_version,
+            g_basic_info.sw_version,g_basic_info.mac_addr_base);
         break;
     case PAGE_PORTS:
         request_update_ports(&g_port_info);
@@ -37,6 +38,9 @@ static void send_page_data(PAGE page) {
         request_update_hosts_paged(get_hosts(), get_hosts_count(),
                                    g_host_page * HOSTS_PER_PAGE);
         break;
+    case PAGE_WEATHER:
+	    request_update_weather(&g_weather_info);
+		break;
     default:
         syslog(LOG_WARNING, "unknown page requested: %d\n", page);
         break;
@@ -49,6 +53,7 @@ void page_send_initial_data() {
     send_page_data(PAGE_WAN);
     send_page_data(PAGE_WIFI);
     send_page_data(PAGE_HOSTS);
+	send_page_data(PAGE_WEATHER);
     request_switch_page(PAGE_WAN);
 }
 

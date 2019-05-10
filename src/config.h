@@ -16,6 +16,7 @@ typedef struct _config {
      * K3
      * A1
      * r3921
+     * r3921
      * 02:00:00:00:00:00
      */
     char *basic_info_script;
@@ -117,6 +118,30 @@ typedef struct _config {
      */
     char *host_script;
 #define DEFAULT_HOST_SCRIPT "/lib/k3screenctrl/host.sh"
+
+    /**
+     * This script will be called in order to get weather info.
+     *
+     * Expected output format (one line for each field):
+     * city
+     * temp
+     * date
+     * time
+     * weather
+     * week
+     * error
+     *
+     * Example:
+     * 成都
+     * 11
+     * 2019-02-20
+     * 14:29
+     * 25
+     * 0
+     * 0
+     */
+    char *weather_script;
+#define DEFAULT_WEATHER_SCRIPT "/lib/k3screenctrl/weather.sh"
 
     /**
      * Shall we skip GPIO setup (do not reset the microcontroller)?

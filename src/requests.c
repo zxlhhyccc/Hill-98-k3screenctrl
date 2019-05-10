@@ -41,7 +41,7 @@ int request_notify_event(EVENT event) {
 
 int request_update_wan(int is_connected, int tx_Bps, int rx_Bps) {
     WAN_INFO waninfo;
-
+    bzero(&waninfo, sizeof(waninfo));
     waninfo.is_connected = is_connected;
     waninfo.tx_bytes_per_sec = tx_Bps;
     waninfo.rx_bytes_per_sec = rx_Bps;
@@ -50,7 +50,7 @@ int request_update_wan(int is_connected, int tx_Bps, int rx_Bps) {
 }
 
 int request_update_basic_info(const char *prod_name, const char *hw_ver,
-                              const char *fw_ver, const char *mac_addr) {
+                              const char *fw_ver, const char *sw_ver, const char *mac_addr) {
     BASIC_INFO basic_info;
     bzero(&basic_info, sizeof(basic_info));
 
@@ -58,6 +58,7 @@ int request_update_basic_info(const char *prod_name, const char *hw_ver,
     ARRAY_SIZED_STRCPY(basic_info.product_name, prod_name);
     ARRAY_SIZED_STRCPY(basic_info.hw_version, hw_ver);
     ARRAY_SIZED_STRCPY(basic_info.fw_version, fw_ver);
+	ARRAY_SIZED_STRCPY(basic_info.sw_version, sw_ver);
     ARRAY_SIZED_STRCPY(basic_info.mac_addr_base, mac_addr);
 
     return request_send_raw(REQUEST_UPDATE_BASIC_INFO, &basic_info,
@@ -92,4 +93,7 @@ int request_update_hosts_paged(struct _host_info_single hosts[], int len,
     ret |=
         request_send_raw(REQUEST_UPDATE_HOSTS_PAGED, &info, sizeof(HOST_INFO));
     return ret;
+}
+int request_update_weather(WEATHER_INFO *weather_info) {
+	    return request_send_raw(REQUEST_UPDATE_WEATHER, weather_info, sizeof(WEATHER_INFO));
 }
