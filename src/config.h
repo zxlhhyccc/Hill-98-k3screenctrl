@@ -16,7 +16,7 @@ typedef struct _config {
      * K3
      * A1
      * r3921
-     * r3921
+	 * r3921
      * 02:00:00:00:00:00
      */
     char *basic_info_script;
